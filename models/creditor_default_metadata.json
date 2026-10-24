@@ -1,0 +1,99 @@
+{
+  "model": "creditor_loan_default",
+  "target": "loan default (creditor side)",
+  "status": "BASELINE ONLY - weak out-of-time ranking; needs a lender loan book or repayment data",
+  "trained_at": "2026-10-23T17:00:17+00:00",
+  "training_data": {
+    "file": "data/external/zindi_credit/Train.csv",
+    "loans": 68654,
+    "borrowers": 6540,
+    "default_rate": 0.0183,
+    "country": "Kenya",
+    "note": "Zindi African Credit Scoring; research use only, check licence before commercial use"
+  },
+  "evaluation": {
+    "out_of_time": {
+      "cutoff": "2024-07-01",
+      "roc_auc": 0.5955,
+      "pr_auc": 0.1115,
+      "log_loss": 0.3122,
+      "brier": 0.0814,
+      "default_rate": 0.0876,
+      "mean_predicted": 0.0478
+    },
+    "borrower_grouped_cv": {
+      "roc_auc": 0.8743,
+      "pr_auc": 0.2037,
+      "log_loss": 0.0693,
+      "brier": 0.016,
+      "default_rate": 0.0183,
+      "mean_predicted": 0.0183
+    }
+  },
+  "risk_bands": {
+    "watch": {
+      "threshold": 0.03291,
+      "precision": 0.0986,
+      "recall": 0.8034,
+      "flag_rate": 0.7133
+    },
+    "alert": {
+      "threshold": 0.04903,
+      "precision": 0.1231,
+      "recall": 0.547,
+      "flag_rate": 0.3892
+    }
+  },
+  "input_columns": [
+    "customer_id",
+    "tbl_loan_id",
+    "loan_type",
+    "Total_Amount",
+    "Total_Amount_to_Repay",
+    "disbursement_date",
+    "due_date",
+    "duration",
+    "New_versus_Repeat",
+    "Lender_portion_Funded",
+    "defaulted"
+  ],
+  "input_note": "Include each borrower's earlier loans; `defaulted` is the known outcome of past loans (blank if unknown)",
+  "feature_names": [
+    "prior_loans",
+    "prior_loans_30d",
+    "prior_loans_90d",
+    "days_since_last_loan",
+    "days_since_first_loan",
+    "amount_vs_prior_mean",
+    "amount_vs_prior_max",
+    "open_loans",
+    "open_amount_vs_amount",
+    "settled_loans",
+    "prior_defaults",
+    "prior_default_rate",
+    "log_amount",
+    "duration",
+    "lender_share",
+    "is_new_borrower",
+    "loan_type",
+    "disb_day_of_month",
+    "disb_weekday",
+    "due_day_of_month",
+    "due_in_school_fee_month",
+    "due_near_month_end"
+  ],
+  "hgb_params": {
+    "learning_rate": 0.03,
+    "max_iter": 400,
+    "max_leaf_nodes": 15,
+    "min_samples_leaf": 40,
+    "l2_regularization": 1.0,
+    "random_state": 42
+  },
+  "versions": {
+    "python": "3.12.1",
+    "scikit-learn": "1.4.2",
+    "pandas": "3.0.3",
+    "numpy": "2.5.3"
+  }
+}

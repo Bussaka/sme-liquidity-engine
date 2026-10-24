@@ -1,8 +1,19 @@
-pandas
-numpy
-scikit-learn
-shap
-fastapi
-uvicorn
-pydantic
-joblib
+# Pinned to the versions the saved pipelines in models/ were trained with
+pandas==3.0.3
+numpy==2.5.3
+scikit-learn==1.4.2
+scipy==1.17.1
+joblib==1.5.3
+
+# M-Pesa statement parsing (encrypted PDFs need cryptography)
+pypdf==6.14.2
+cryptography==42.0.5
+
+# Explainability and legacy API
+shap==0.52.0
+fastapi==0.141.1
+uvicorn==0.51.0
+pydantic==2.13.4
+
+# Tests
+pytest==8.4.2

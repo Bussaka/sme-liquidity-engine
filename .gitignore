@@ -1,4 +1,14 @@
+# Data: proxy, external and pilot datasets (licences restrict redistribution; pilot data is personal)
 data/
+research_library/
+*.sav
+*.dta
+
+# Secrets (e.g. PILOT_SALT)
+.env
+
+# Python
 __pycache__/
 .venv/
+.pytest_cache/
 .ipynb_checkpoints/
